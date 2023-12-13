@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Shop</title>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+  <div id="app">
+    <h1>Car Shop</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" v-for="car in cars" :key="car.id">
+          <div class="card">
+            <img :src="car.image" class="card-img-top" alt="Car Image">
+            <div class="card-body">
+              <h5 class="card-title">{{ car.name }}</h5>
+              <p class="card-text">{{ car.price }}</p>
+              <button class="btn btn-primary" @click="addToCart(car)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-4">
+      <h3>Cart</h3>
+      <ul class="list-group">
+        <li class="list-group-item" v-for="item in cartItems" :key="item.id">
+          {{ item.name }} - {{ item.price }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        cars: [
+          { id: 1, name: 'Car 1', price: '$10000', image: 'car1.jpg' },
+          { id: 2, name: 'Car 2', price: '$15000', image: 'car2.jpg' },
+          { id: 3, name: 'Car 3', price: '$20000', image: 'car3.jpg' },
+          { id: 4, name: 'Car 4', price: '$25000', image: 'car4.jpg' },
+        ],
+        cartItems: []
+      },
+      methods: {
+        addToCart(car) {
+          this.cartItems.push(car);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
